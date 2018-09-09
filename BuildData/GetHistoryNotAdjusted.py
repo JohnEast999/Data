@@ -5,23 +5,19 @@ pro = loginTusharePro.login()
 import os
 import pandas as pd
 from datetime import date
-import datetime
 from lib import myTimeTools
 
-test_ts_code = '000001.SZ'
-# data = pro.daily(ts_code=ts_code, start_date='20180701', end_date='20180718')
+# test_ts_code = '000001.SZ'
 
 stockListCsv = '../myData/stockList.csv'
 stockList = pd.read_csv(stockListCsv, encoding='utf-8')
 
 date_today = date.today()
 
-for thisTsCode in stockList['ts_code']:
-    pass
 
 
-def addData(tsCode):
-    path = '../myData/stockHistory/' + tsCode + '.csv'
+def addData(tsCode,listDate):
+    path = '../myData/stockHistoryNotAdjusted/' + tsCode + '.csv'
     fileExist_bool = os.path.exists(path)
 
     if fileExist_bool:
@@ -34,11 +30,14 @@ def addData(tsCode):
             startDate = myTimeTools.dateToString(date_onedayAfterLastTrade)
             endDate = myTimeTools.dateToString(date_today)
             dataShouldAdd = pro.daily(ts_code=tsCode, start_date=startDate, end_date=endDate).iloc[::-1]
-            print(dataShouldAdd)
-
+            dataShouldAdd.to_csv(path, mode='a', header= None)
     else:
+        startDate = listDate
+        endDate = myTimeTools.dateToString(date_today)
+        newData = pro.daily(ts_code=tsCode, start_date=startDate, end_date=endDate).iloc[::-1]
+        newData.to_csv(path)
 
-        pass
-        # print(thisTsCode + ' if exists: '+ str(fileExist_bool))
-
-addData(test_ts_code)
+for index, row in stockList.iterrows():
+    thisTsCode = row['ts_code']
+    thisListDate = row['list_date']
+    addData(thisTsCode, thisListDate)
