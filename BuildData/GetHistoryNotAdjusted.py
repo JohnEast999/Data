@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import date
 from lib import myTimeTools
 
-test_ts_code = '000002.SZ'
+# test_ts_code = '000002.SZ'
 
 stockListCsv = '../myData/stockList.csv'
 stockList = pd.read_csv(stockListCsv, encoding='utf-8')
@@ -48,9 +48,9 @@ def addData(tsCode,listDate):
         newData.to_csv(path)
 
 
-addData(test_ts_code, '20011213')
+# addData(test_ts_code, '20011213')
 
-# for index, row in stockList.iterrows():
-#     thisTsCode = row['ts_code']
-#     thisListDate = row['list_date']
-#     addData(thisTsCode, thisListDate)
+for index, row in stockList.iterrows():
+    thisTsCode = row['ts_code']
+    thisListDate = row['list_date']
+    addData(thisTsCode, thisListDate)
