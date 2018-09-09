@@ -7,7 +7,7 @@ import time
 ts.set_token('d7e28c79162bc5a6fd505e5183c7d9fe45ef6fb84c2eef01b8b25bf5')
 pro = ts.pro_api()
 
-stockList = '../Data/stockList.csv'
+stockList = '../myData/stockList.csv'
 a = pd.read_csv(stockList, encoding='utf-8')
 
 for this_ts_code in a['ts_code']:
