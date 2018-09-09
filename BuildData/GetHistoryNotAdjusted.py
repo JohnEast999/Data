@@ -1,5 +1,6 @@
 ## 生成 myData/stockPriceAmount/ stockID.csv 文件
 from lib import loginTusharePro
+
 pro = loginTusharePro.login()
 
 import os
