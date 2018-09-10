@@ -7,6 +7,7 @@ import os
 import pandas as pd
 from datetime import date
 from lib import myTimeTools
+import time
 
 # test_ts_code = '000002.SZ'
 
@@ -47,6 +48,7 @@ def addData(tsCode,listDate):
 
 
         newData.to_csv(path)
+    time.sleep(6)
 
 
 # addData(test_ts_code, '20011213')
